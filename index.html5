@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Bhuyashi!</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fdf6f0;font-family:'Poppins',sans-serif;overflow-x:hidden}
+.screen{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
+#page1{background:linear-gradient(135deg,#ffd6e0,#ffeccf,#d6e8ff);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:30px;text-align:center;transition:0.8s}
+.envelope{width:280px;height:180px;background:#fff;position:relative;border-radius:0 0 12px 12px;box-shadow:0 20px 40px rgba(0,0,0,0.15);cursor:pointer;margin-top:20px}
+.envelope:before{content:'';position:absolute;top:-90px;left:0;width:0;height:0;border-left:140px solid transparent;border-right:140px solid transparent;border-bottom:90px solid #ffe0e8;z-index:2;transition:0.6s;transform-origin:bottom}
+.envelope.open:before{transform:rotateX(180deg);z-index:0}
+.envelope:after{content:'';position:absolute;top:0;left:0;width:0;height:0;border-left:140px solid #ffd6e0;border-right:140px solid #ffc2d1;border-top:90px solid transparent;border-bottom:90px solid #ffb3c6;border-radius:0 0 12px 12px}
+.letter{position:absolute;width:250px;height:120px;background:white;left:15px;top:20px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Dancing Script';font-size:22px;color:#e35d82;transition:0.8s;z-index:1;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+.envelope.open .letter{transform:translateY(-80px)}
+.tap{margin-top:30px;color:#8a5a6a;font-size:13px;letter-spacing:2px;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+#page2{display:none;animation:fadeUp 0.8s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.header{padding:28px 28px 18px;text-align:center;background:white;border-radius:0 0 28px 28px;box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+.header h1{font-family:'Dancing Script';font-size:42px;color:#5a2a3a}
+.header p{font-size:12px;letter-spacing:3px;color:#8a5a6a;margin-top:6px}
+.cake-area{background:linear-gradient(#fff,#fff5f8);padding:24px;text-align:center;margin:16px;border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,0.06);border:2px dashed #ffd6e0}
+.cake-wrap{cursor:pointer}
+.candles{display:flex;justify-content:center;gap:24px;margin-bottom:-6px}
+.candle{width:12px;height:36px;background:linear-gradient(#fff,#ffe5a0);border-radius:6px;position:relative}
+.flame{width:14px;height:18px;background:radial-gradient(#ffeb3b,#ff9800);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;position:absolute;top:-18px;left:-1px;animation:flicker 0.3s infinite alternate;box-shadow:0 0 10px #ff9800}
+@keyframes flicker{0%{transform:scale(1)}100%{transform:scale(1.1)}}
+.flame.off{transform:scale(0);opacity:0;transition:0.4s}
+.cake-top{width:170px;height:20px;background:#fff;border-radius:10px;margin:0 auto;border:2px solid #ffe0e8}
+.cake-base{width:170px;height:62px;background:linear-gradient(#ff8fab,#ff6e9a);margin:0 auto;border-radius:10px 10px 16px 16px}
+.plate{width:190px;height:12px;background:#eee;border-radius:50%;margin:6px auto 0}
+.scrap{background:white;margin:16px;border-radius:22px;padding:22px;box-shadow:0 8px 24px rgba(0,0,0,0.06);position:relative}
+.scrap h3{font-family:'Caveat';font-size:28px;color:#5a2a3a;margin-bottom:14px}
+.tape{position:absolute;width:70px;height:20px;background:rgba(255,214,224,0.8);transform:rotate(-12deg);top:10px;left:20px}
+.polaroids{display:flex;gap:12px;overflow-x:auto;padding:10px 0}
+.pola{flex:0 0 120px;background:white;padding:8px 8px 28px;box-shadow:0 4px 12px rgba(0,0,0,0.1);transform:rotate(-3deg);border-radius:2px}
+.pola:nth-child(2){transform:rotate(2deg)}
+.pola .img{width:100%;height:90px;background:linear-gradient(135deg,#ffd6e0,#d6e8ff);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.pola .cap{font-family:'Caveat';font-size:14px;text-align:center;margin-top:8px;color:#5a2a3a}
+.gifts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+.gift{aspect-ratio:1;background:#fff7f9;border:2px dashed #ffb3c6;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:0.3s;padding:10px;text-align:center}
+.gift:hover{transform:scale(1.05);background:#ffecf1}
+.gift span{font-size:32px}
+.gift p{font-size:11px;margin-top:6px;font-weight:600;color:#e35d82}
+.letter-paper{background:#fffef5;margin:16px;border-radius:4px;padding:26px 24px;box-shadow:0 8px 24px rgba(0,0,0,0.06);border-left:4px solid #ff8fab;background-image:repeating-linear-gradient(transparent,transparent 28px,#f1e8d0 28px,#f1e8d0 29px)}
+.letter-paper p{font-family:'Caveat';font-size:20px;line-height:29px;color:#4a3a3a}
+.hand{font-family:'Dancing Script';font-size:26px;color:#e35d82;margin-top:10px}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:99;padding:24px}
+.modal-box{background:white;border-radius:20px;padding:28px;max-width:340px;width:100%;text-align:center;animation:pop 0.4s}
+@keyframes pop{0%{transform:scale(0.7)}100%{transform:scale(1)}}
+.modal-box h2{font-family:'Dancing Script';font-size:32px;color:#e35d82}
+.modal-box p{margin-top:12px;color:#555;line-height:1.7}
+.close{margin-top:18px;background:#ff8fab;color:white;border:none;padding:10px 22px;border-radius:20px;cursor:pointer}
+.confetti{position:fixed;top:-10px;pointer-events:none;animation:fall linear forwards;z-index:100}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.btn{width:100%;background:#ff8fab;color:white;border:none;padding:14px;border-radius:30px;font-weight:600;margin-top:16px;cursor:pointer}
+.music-btn{position:fixed;bottom:20px;right:20px;width:48px;height:48px;background:#ff8fab;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,0.2);cursor:pointer;z-index:50;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+</style>
+</head>
+<body>
+
+<audio id="bdayAudio" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a650f6.mp3?filename=happy-birthday-11293.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<div id="page1">
+<h2 style="font-family:'Dancing Script';font-size:44px;color:#5a2a3a">Hey Bhuyashi! 💌</h2>
+<p style="color:#8a5a6a;margin-top:8px">I have something for you...</p>
+<div class="envelope" id="env" onclick="openEnv()">
+<div class="letter">Open me! 💖</div>
+</div>
+<div class="tap">TAP THE ENVELOPE 👆<br><span style="font-size:11px">with music 🎶</span></div>
+</div>
+  <div id="page2" class="screen">
+<div class="header">
+<h1>Happy Birthday,<br>Bhuyashi! 🎂</h1>
+<p>MY NITR WALI BEHEN • MY FOREVER SISTER</p>
+</div>
+
+<div class="cake-area">
+<h3 style="font-family:'Caveat';font-size:24px;color:#5a2a3a">Make a wish & blow! 💨</h3>
+<div class="cake-wrap" onclick="blow()">
+<div class="candles">
+<div class="candle"><div class="flame"></div></div>
+<div class="candle"><div class="flame"></div></div>
+<div class="candle"><div class="flame"></div></div>
+</div>
+<div class="cake-top"></div>
+<div class="cake-base"></div>
+<div class="plate"></div>
+</div>
+<p id="hint" style="font-size:12px;color:#b07a8a;margin-top:10px">Tap or blow into mic!</p>
+</div>
+
+<div class="scrap">
+<div class="tape"></div>
+<h3>📸 Our NITR Scrapbook</h3>
+<div class="polaroids">
+<div class="pola"><div class="img">🏫</div><div class="cap">First Day @ NITR</div></div>
+<div class="pola"><div class="img">☕</div><div class="cap">Chai & Gossip</div></div>
+<div class="pola"><div class="img">📚</div><div class="cap">LA Wala Stress</div></div>
+</div>
+</div>
+
+<div class="scrap">
+<h3>🎁 3 Surprises - Open Me!</h3>
+<div class="gifts">
+<div class="gift" onclick="openGift(1)"><span>💌</span><p>Secret Letter</p></div>
+<div class="gift" onclick="openGift(2)"><span>🎀</span><p>Why You're Special</p></div>
+<div class="gift" onclick="openGift(3)"><span>🌸</span><p>My Promise</p></div>
+</div>
+</div>
+
+<div class="letter-paper">
+<p>Hey <b>Bhuyashi</b>,</p>
+<p>I still remember the first time we met in NITR. New campus, new faces, that first-year nervousness. Everything was so new and a little scary.</p>
+<p>And then I met you. A random interaction that I thought would be just a "hi-bye" became the best friendship of my NITR life.</p>
+<p>From lectures in LA to bunking and sitting at the lakeside, from mess food complaints to hostel corridor talks at 2 AM, from exam panic to laughing at nothing — you were there in every memory that matters.</p>
+<p>You came as a friend but stayed as my sister. My constant, my safe space, my favourite human.</p>
+<p>On your birthday, I wish you soft mornings, loud laughs, dreams coming true, and a life as beautiful as your heart.</p>
+<p>NITR gave me a degree, but more importantly, it gave me YOU.</p>
+<div class="hand">Happy Birthday, meri behen!<br>— Always your brother from NITR ❤️</div>
+</div>
+
+<button class="btn" onclick="launchConfetti()">Celebrate Again 🎉</button>
+<p style="text-align:center;font-size:11px;color:#bbb;margin:20px">Made with DIY love + music for Bhuyashi 🎶</p>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<h2 id="mTitle"></h2>
+<p id="mText"></p>
+<button class="close" onclick="closeM()">Close 💖</button>
+</div>
+</div>
+
+<script>
+let audio=document.getElementById('bdayAudio');
+let playing=false;
+let musicBtn=document.getElementById('musicBtn');
+function toggleMusic(){
+ if(playing){audio.pause();musicBtn.innerHTML='🔇';playing=false;}
+ else{audio.play().then(()=>{playing=true;musicBtn.innerHTML='🎵';});}
+}
+function openEnv(){
+ document.getElementById('env').classList.add('open');
+ audio.play().then(()=>{playing=true;}).catch(()=>{});
+ setTimeout(()=>{
+   document.getElementById('page1').style.transform='translateY(-100vh)';
+   setTimeout(()=>{
+     document.getElementById('page1').style.display='none';
+     document.getElementById('page2').style.display='block';
+     launchConfetti();
+   },600);
+ },600);
+}
+let blown=false;
+function blow(){
+ if(blown) return;
+ blown=true;
+ document.querySelectorAll('.flame').forEach(f=>f.classList.add('off'));
+ document.getElementById('hint').innerHTML='✨ Yayy Bhuyashi! Wish granted! ✨';
+ launchConfetti();
+}
+function launchConfetti(){
+ for(let i=0;i<70;i++){
+  const e=document.createElement('div');
+  e.className='confetti';
+  e.innerHTML=['🎉','💖','🎂','✨','💌','🌸'][Math.floor(Math.random()*6)];
+  e.style.left=Math.random()*100+'vw';
+  e.style.animationDuration=(2+Math.random()*3)+'s';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),4000);
+ }
+}
+function openGift(n){
+ const t=document.getElementById('mTitle');
+ const tx=document.getElementById('mText');
+ if(n==1){t.innerHTML='💌 Secret Letter';tx.innerHTML='Bhuyashi, if you ever feel low, just remember there is a brother from NITR who is always proud of you. You are doing amazing. Call me anytime, okay? Always.'}
+ if(n==2){t.innerHTML='🎀 Why You Are Special';tx.innerHTML='Because you are kind when world is not. Because you listen. Because you make boring NITR days fun. Because you are YOU. No one like you, Bhuyashi.'}
+ if(n==3){t.innerHTML='🌸 My Promise';tx.innerHTML='I promise to always be your NITR wala brother. To hype you, protect you, annoy you, and celebrate every win. Sister for life, deal? 🤝'}
+ document.getElementById('modal').style.display='flex';
+ launchConfetti();
+}
+function closeM(){document.getElementById('modal').style.display='none'}
+async function initBlow(){
+ try{
+  const s=await navigator.mediaDevices.getUserMedia({audio:true});
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const an=ctx.createAnalyser();
+  ctx.createMediaStreamSource(s).connect(an);
+  const d=new Uint8Array(an.fftSize);
+  function check(){an.getByteFrequencyData(d);let sum=d.reduce((a,b)=>a+b,0)/d.length;if(sum>35)blow();requestAnimationFrame(check);}check();
+ }catch(e){}
+}
+initBlow();
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Bhuyashi ♡ The Long Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fbf8f3;font-family:'Inter',sans-serif;color:#4a3f3a;overflow-x:hidden;scroll-behavior:smooth}
+.wrap{max-width:460px;margin:0 auto;min-height:100vh;position:relative}
+#page1{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px 30px;text-align:center;background:#fbf8f3;transition:0.9s cubic-bezier(.77,0,.175,1);position:relative;z-index:10}
+#page1.out{transform:translateY(-100vh);opacity:0}
+.small{letter-spacing:0.4em;font-size:10px;text-transform:uppercase;opacity:0.5;margin-bottom:18px}
+#page1 h1{font-size:58px;line-height:0.85;font-weight:400;font-family:'Cormorant Garamond';font-style:italic}
+.count{margin-top:18px;font-size:12px;opacity:0.6;letter-spacing:0.15em}
+.env{margin-top:42px;width:300px;height:200px;position:relative;cursor:pointer}
+.env-back{width:100%;height:100%;background:#fff;border:1px solid #efe8df;border-radius:3px;box-shadow:0 20px 40px rgba(0,0,0,0.06)}
+.env-flap{position:absolute;top:0;left:0;width:100%;height:50%;background:#fff9f1;border-bottom:1px solid #efe8df;transform-origin:top;transition:0.7s;z-index:3;clip-path:polygon(0 0,100% 0,50% 100%)}
+.env.open .env-flap{transform:rotateX(180deg);opacity:0}
+.env-letter{position:absolute;left:10px;right:10px;top:30%;height:80%;background:#fff;z-index:2;transition:0.9s;border:1px solid #f5efe6;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px rgba(0,0,0,0.04)}
+.env.open .env-letter{transform:translateY(-62%)}
+.seal{width:46px;height:46px;background:#e8a0b3;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;box-shadow:0 4px 12px rgba(232,160,179,0.4);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.tap{margin-top:30px;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;opacity:0.4;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+#page2{display:none;opacity:0;transition:0.8s;padding-bottom:60px}
+#page2.show{display:block;opacity:1}
+.top-hero{padding:68px 34px 36px;text-align:left}
+.top-hero .eyebrow{font-size:10px;letter-spacing:0.4em;text-transform:uppercase;opacity:0.4;margin-bottom:18px}
+.top-hero h2{font-family:'Cormorant Garamond';font-size:58px;line-height:0.9;font-weight:400}
+.top-hero h2 i{font-style:italic}
+.line{width:100%;height:1px;background:#efe8df;margin:22px 0}
+.desc{font-size:13.5px;line-height:1.9;opacity:0.68;font-weight:300}
+.card{margin:18px 18px 0;background:#fff;border:1px solid #f5efe6;border-radius:24px;padding:28px;box-shadow:0 18px 40px rgba(0,0,0,0.03)}
+.cake-card{text-align:center}
+.cake-eyebrow{font-size:10px;letter-spacing:0.35em;text-transform:uppercase;opacity:0.4;margin-bottom:16px}
+.candles{display:flex;justify-content:center;gap:28px;margin-bottom:-4px}
+.candle{width:8px;height:32px;background:#fbf8f3;border:1px solid #efe8df;border-radius:10px;position:relative}
+.flame{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:10px;height:14px;background:radial-gradient(ellipse at center,#ffe8a0 0%,#ff8a5c 100%);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;animation:flicker 0.25s infinite alternate}
+.flame.off{opacity:0;transform:translateX(-50%) scale(0);transition:0.6s}
+@keyframes flicker{from{transform:translateX(-50%) scaleY(1)}to{transform:translateX(-50%) scaleY(1.2)}}
+.cake{margin:0 auto;width:160px;height:18px;background:#fff;border:1px solid #efe8df;border-radius:20px}
+.cake-2{margin:0 auto;width:160px;height:62px;background:#fde6e0;border-radius:0 0 18px 18px;border:1px solid #f5d8cf;border-top:0;position:relative;overflow:hidden}
+.cake-2:after{content:'~ ~ ~';position:absolute;top:10px;left:0;right:0;text-align:center;letter-spacing:6px;opacity:0.25;font-size:12px}
+.plate{margin:10px auto 0;width:190px;height:10px;background:#fbf8f3;border-radius:50%;border:1px solid #f5efe6}
+.timeline{position:relative;padding-left:22px}
+.timeline:before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:#efe8df}
+.t-dot{width:13px;height:13px;background:#e8a0b3;border-radius:50%;position:absolute;left:0;top:4px;border:3px solid #fbf8f3}
+.t-item{position:relative;margin-bottom:28px;padding-left:8px}
+.t-item h4{font-family:'Cormorant Garamond';font-size:20px;font-style:italic;font-weight:400}
+.t-item p{font-size:12.5px;opacity:0.65;margin-top:6px;line-height:1.6}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.miniGame{border-radius:18px;background:#fbf8f3;border:1px dashed #e8d5c8;padding:20px 14px;text-align:center;cursor:pointer;transition:0.3s}
+.miniGame:hover{background:#fff5ef;transform:translateY(-2px)}
+.miniGame span{font-size:26px;display:block}
+.miniGame b{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-top:10px;display:block;opacity:0.7}
+.miniGame p{font-size:11px;opacity:0.6;margin-top:6px}
+.scratchWrap{position:relative;width:100%;height:160px;background:linear-gradient(135deg,#fde6e0,#fff2e8);border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.scratchCover{position:absolute;inset:0;background:#e8d5c8;display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;opacity:1;transition:0.6s;cursor:pointer;z-index:2}
+.scratchCover.hide{opacity:0;pointer-events:none;transform:scale(1.1)}
+.scratchText{font-family:'La Belle Aurore';font-size:26px;color:#4a3f3a}
+.memGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.memCard{aspect-ratio:1;background:#fbf8f3;border:1px solid #efe8df;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:0.3s;user-select:none}
+.memCard.flip{background:#fff}
+.memCard.matched{background:#e8f5e9;border-color:#c8e6c9;pointer-events:none}
+.wheel{width:160px;height:160px;border-radius:50%;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,0.06);margin:0 auto;position:relative;background:conic-gradient(#fde6e0 0 60deg,#fff2cc 60deg 120deg,#e0e7ff 120deg 180deg,#d1fae5 180deg 240deg,#ffe4e6 240deg 300deg,#f3e8ff 300deg 360deg);transition:transform 3s cubic-bezier(.17,.67,.16,1.02)}
+.wheelPointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:18px}
+.letter-paper{background:#fffdf9;border:1px solid #efe8df;border-radius:20px;padding:32px 28px}
+.letter-paper p{font-family:'Cormorant Garamond';font-size:19px;line-height:1.75;color:#5a4d47;margin-bottom:16px}
+.letter-paper p.sm{font-family:'Inter';font-size:13px;opacity:0.6;line-height:1.8;font-weight:300}
+.divider{width:28px;height:1px;background:#e8d5c8;margin:22px 0}
+.modal{position:fixed;inset:0;background:rgba(251,248,243,0.94);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;z-index:99;padding:22px}
+.modal-box{background:#fff;border:1px solid #efe8df;border-radius:26px;padding:30px;max-width:380px;width:100%;box-shadow:0 30px 60px rgba(0,0,0,0.1);animation:pop 0.4s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes pop{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-box h2{font-family:'Cormorant Garamond';font-size:32px;font-style:italic;line-height:1.1}
+.modal-box p{margin-top:14px;font-size:14px;line-height:1.8;opacity:0.7;font-weight:300}
+.close{margin-top:22px;background:#4a3f3a;color:white;border:none;padding:12px 24px;border-radius:100px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer}
+input.code{width:100%;padding:14px 16px;border:1px solid #efe8df;border-radius:12px;margin-top:14px;font-family:'Inter';letter-spacing:0.3em;text-align:center}
+.progressBar{height:6px;background:#f5efe6;border-radius:10px;overflow:hidden;margin-top:14px}
+.progressFill{height:100%;background:#e8a0b3;width:0%;transition:0.4s}
+.music{position:fixed;bottom:22px;right:22px;width:44px;height:44px;background:#fff;border:1px solid #efe8df;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.08);cursor:pointer;z-index:50}
+.confetti{position:fixed;top:-10px;pointer-events:none;animation:fall linear forwards;z-index:100}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.badge{display:inline-block;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;background:#fbf8f3;border:1px solid #efe8df;padding:5px 10px;border-radius:100px;margin-bottom:12px;opacity:0.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+<audio id="audio" loop><source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a650f6.mp3?filename=happy-birthday-11293.mp3" type="audio/mpeg"></audio>
+<div class="music" id="music" onclick="toggleMusic()">♪</div>
+<div id="page1">
+<div class="small">a long little universe for</div>
+<h1>bhuyashi<br><i style="font-size:40px">my sister ♡</i></h1>
+<div class="count" id="count">Made with 200% pyaar from NITR</div>
+<div class="env" id="env" onclick="openEnv()"><div class="env-back"></div><div class="env-flap"></div><div class="env-letter"><div class="seal">♡</div></div></div>
+<div class="tap">tap to open — 7 surprises inside</div>
+</div>
+<div id="page2">
+<div class="top-hero">
+<div class="eyebrow">NITR ROURKELA — 2023 → FOREVER — MY SISTER</div>
+<h2>happy<br><i>birthday,</i><br>bhuyashi.</h2>
+<div class="line"></div>
+<div class="desc">This isn't just a birthday page. It's a small museum of us. From random hi in NITR to sister for life. I made 7 tiny DIY corners for you — play all of them, okay?</div>
+<div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+<div class="badge">7 games</div><div class="badge">1 secret letter</div><div class="badge">∞ memories</div>
+</div>
+</div>
+<div class="card cake-card">
+<div class="cake-eyebrow">level 1 — make a wish & blow</div>
+<div onclick="blow()" style="cursor:pointer">
+<div class="candles"><div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div></div>
+<div class="cake"></div><div class="cake-2"></div><div class="plate"></div>
+</div>
+<div id="hint" class="desc" style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase">Tap candles or blow into mic to blow ♡</div>
+<div class="progressBar"><div class="progressFill" id="prog"></div></div>
+</div>
+<div class="card">
+<div class="small">our story</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:28px;font-style:italic;margin:8px 0 18px">How a random hi became sister.</h3>
+<div class="timeline">
+<div class="t-item"><div class="t-dot"></div><h4>Day 1 — NITR</h4><p>New campus, nervous smiles. Who knew we'd find home in each other?</p></div>
+<div class="t-item"><div class="t-dot"></div><h4>LA Lectures & Bunk</h4><p>Attendance ka tension, last bench gossip, chai breaks that lasted an hour.</p></div>
+<div class="t-item"><div class="t-dot"></div><h4>Lakeside Evenings</h4><p>Golden hour talks, mess complaints, future plans that felt too big then.</p></div>
+<div class="t-item"><div class="t-dot" style="background:#4a3f3a"></div><h4>Today — Forever</h4><p>You are not just my friend, you are my sister. NITR gave degree, but gave me you — best part.</p></div>
+</div>
+</div>
+<div class="card">
+<div class="small">surprise #1 — scratch card</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 14px">Scratch to reveal your gift</h3>
+<div class="scratchWrap" onclick="revealScratch()">
+<div class="scratchText" id="scratchText">You are my favorite notification ♡ + treat pending from brother</div>
+<div class="scratchCover" id="scratchCover">✦ TAP TO SCRATCH ✦</div>
+</div>
+</div>
+<div class="card">
+<div class="small">surprise #2 — DIY memory match</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 6px">Match our NITR words</h3>
+<p class="desc" style="font-size:12px;margin-bottom:14px">Find pairs — LA, Lakeside, Mess, Chai, Hostel, Sister</p>
+<div class="memGrid" id="memGrid"></div>
+<div id="memMsg" class="desc" style="margin-top:12px;text-align:center;display:none">You won! You remember everything ♡</div>
+</div>
+<div class="card" style="text-align:center">
+<div class="small">surprise #3 — spin the wheel</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 16px">What is Bhuyashi today?</h3>
+<div style="position:relative;padding-top:14px"><div class="wheelPointer">▼</div><div class="wheel" id="wheel"></div></div>
+<button class="close" onclick="spin()" id="spinBtn" style="margin-top:18px">SPIN — ♡</button>
+<div id="spinResult" style="margin-top:14px;font-family:'La Belle Aurore';font-size:22px;min-height:28px"></div>
+</div>
+<div class="card">
+<div class="small">surprise #4 — open when letters</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 14px">7 letters, for 7 moods</h3>
+<div class="grid2">
+<div class="miniGame" onclick="openGift(1)"><span>😔</span><b>Open when sad</b><p>a hug letter</p></div>
+<div class="miniGame" onclick="openGift(2)"><span>🤩</span><b>Open when happy</b><p>cheer letter</p></div>
+<div class="miniGame" onclick="openGift(3)"><span>😤</span><b>Open when angry</b><p>calm letter</p></div>
+<div class="miniGame" onclick="openGift(4)"><span>🥺</span><b>Open when miss NITR</b><p>memory letter</p></div>
+<div class="miniGame" onclick="openGift(5)"><span>😴</span><b>Open when tired</b><p>soft letter</p></div>
+<div class="miniGame" onclick="openGift(6)"><span>✨</span><b>Open when proud</b><p>you did it</p></div>
+</div>
+</div>
+<div class="card">
+<div class="small">surprise #5 — secret vault</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 6px">Crack the code — 4 digit</h3>
+<p class="desc" style="font-size:12px">Hint: The year we met at NITR? (try 2023)</p>
+<input class="code" id="codeInput" maxlength="4" placeholder="----" inputmode="numeric">
+<button class="close" onclick="checkCode()" style="width:100%;margin-top:12px">UNLOCK SECRET — ♡</button>
+<div id="codeMsg" class="desc" style="margin-top:10px;text-align:center;display:none"></div>
+</div>
+<div class="card">
+<div class="small">surprise #6 — how well do you know us?</div>
+<h3 style="font-family:'Cormorant Garamond';font-size:24px;font-style:italic;margin:8px 0 14px">Mini sister quiz</h3>
+<div id="quizBox">
+<p class="desc" style="margin-bottom:10px;font-weight:400;color:#4a3f3a" id="qText">Where did we first talk properly?</p>
+<div class="grid2" id="qOpts"></div>
+</div>
+<div id="quizResult" style="display:none;text-align:center;margin-top:14px;font-family:'La Belle Aurore';font-size:20px"></div>
+</div>
+<div class="letter-paper" style="margin:22px 18px 0">
+<p>hey bhuyashi,</p>
+<p>If you played all games till here — you are as crazy as me, and that's why I love you as sister.</p>
+<p>I still remember first day in NITR. New campus, new faces, that nervousness. And then I met you — random, unexpected, and somehow meant to be.</p>
+<p class="sm">From LA lectures and bunking to lakeside evenings, from mess complaints to 2am hostel talks, from exam panic to laughing at absolutely nothing — you were in every chapter that actually mattered.</p>
+<p>You came as a friend but stayed as my sister. My safe space, my constant. You listen without judging, you hype like no one else, you make boring days soft.</p>
+<p>Thank you for making NITR feel like home. For being kind in a world that forgets how to be. Stay exactly like this — real, warm, magic.</p>
+<p>On your birthday, I wish you soft mornings, loud laughs, dreams that come true quietly, and people who love you as purely as you love them.</p>
+<p>NITR gave me a degree. But more importantly, it gave me you.</p>
+<div class="divider"></div>
+<p style="font-family:'La Belle Aurore',cursive;font-size:23px;opacity:0.9">Happy birthday, meri behen.<br>Always your brother — from NITR ♡<br><span style="font-size:14px;font-family:'Inter';opacity:0.6">— Ashish</span></p>
+<button class="close" onclick="finalSurprise()" style="width:100%;margin-top:22px;background:#e8a0b3">CLICK FOR FINAL FIREWORKS — ✨</button>
+</div>
+<div style="padding:22px 20px 40px"><div class="line"></div><div style="text-align:center;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.3">made with 7 games + infinite pyaar for bhuyashi</div></div>
+</div>
+</div>
+<div class="modal" id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><h2 id="mTitle"></h2><p id="mText"></p><button class="close" onclick="closeM()">close — ♡</button></div></div>
+<script>
+let audio=document.getElementById('audio'),playing=false,progress=0;
+function updateProg(v){progress=Math.min(100,progress+v);document.getElementById('prog').style.width=progress+'%'}
+function toggleMusic(){if(playing){audio.pause();playing=false;document.getElementById('music').innerHTML='♪'}else{audio.play().then(()=>{playing=true;document.getElementById('music').innerHTML='♫'})}}
+function openEnv(){document.getElementById('env').classList.add('open');audio.play().then(()=>{playing=true;document.getElementById('music').innerHTML='♫'}).catch(()=>{});setTimeout(()=>{document.getElementById('page1').classList.add('out');setTimeout(()=>{document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';setTimeout(()=>{document.getElementById('page2').classList.add('show');launch(40);updateProg(10)},50)},800)},700)}
+let blown=false;function blow(){if(blown)return;blown=true;document.querySelectorAll('.flame').forEach(f=>f.classList.add('off'));document.getElementById('hint').innerHTML='wish granted, bhuyashi — all games unlocked ♡';launch(60);updateProg(20)}
+function launch(n=50){for(let i=0;i<n;i++){const e=document.createElement('div');e.className='confetti';e.innerHTML=['♡','✿','✧','🎂','✨'][Math.floor(Math.random()*5)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(10+Math.random()*18)+'px';e.style.opacity=0.7;e.style.animationDuration=(2.5+Math.random()*3)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),5000)}}
+function revealScratch(){document.getElementById('scratchCover').classList.add('hide');launch(20);updateProg(15)}
+const pairs=['📚','☕','🏠','💛','📚','☕','🏠','💛','🌅','✨','🌅','✨'];
+let memCards=[],flipped=[],matched=0;
+function initMem(){const g=document.getElementById('memGrid');g.innerHTML='';const shuffled=[...pairs].sort(()=>Math.random()-0.5);shuffled.forEach((em,i)=>{const d=document.createElement('div');d.className='memCard';d.innerHTML='?';d.dataset.val=em;d.dataset.i=i;d.onclick=()=>flipMem(d);g.appendChild(d)})}
+function flipMem(el){if(el.classList.contains('flip')||el.classList.contains('matched')||flipped.length>=2)return;el.classList.add('flip');el.innerHTML=el.dataset.val;flipped.push(el);if(flipped.length==2){const [a,b]=flipped;if(a.dataset.val==b.dataset.val){a.classList.add('matched');b.classList.add('matched');flipped=[];matched+=2;if(matched==pairs.length){document.getElementById('memMsg').style.display='block';launch(30);updateProg(15)}}else{setTimeout(()=>{a.classList.remove('flip');b.classList.remove('flip');a.innerHTML='?';b.innerHTML='?';flipped=[]},700)}}}
+initMem();
+let spinning=false;const spinTexts=['My Sister Forever','Cutest Human','NITR ka Best Gift','My Safe Space','Sunshine Girl','Main Character Energy','Pure Heart ♡'];
+function spin(){if(spinning)return;spinning=true;document.getElementById('spinResult').innerHTML='';const w=document.getElementById('wheel');const rot=720+Math.random()*1440;w.style.transform=`rotate(${rot}deg)`;setTimeout(()=>{const idx=Math.floor(Math.random()*spinTexts.length);document.getElementById('spinResult').innerHTML=spinTexts[idx]+' — ♡';launch(20);updateProg(10);spinning=false},3100)}
+function openGift(n){const t=document.getElementById('mTitle');const tx=document.getElementById('mText');
+if(n==1){t.innerHTML='Open when sad';tx.innerHTML='Hey, look up. You have survived every bad day till now. This too shall pass. And I am here — always. Text me "NITR" and I will call you in 2 mins. Promise.'}
+if(n==2){t.innerHTML='Open when happy';tx.innerHTML='YAY! See! You deserve this happiness and more. Send me that laugh voice note, I want to keep it. So proud of you, behna!'}
+if(n==3){t.innerHTML='Open when angry';tx.innerHTML='Breathe. 4-7-8. Not everyone deserves your energy. You are too pure for their nonsense. Go drink water, wash face, come back — queen energy only.'}
+if(n==4){t.innerHTML='Open when you miss NITR';tx.innerHTML='Same. I miss LA stairs, lakeside sunset, your random rants outside hostel. But we carry NITR inside us. And we will go back — alumni meet, okay?'}
+if(n==5){t.innerHTML='Open when tired';tx.innerHTML='Rest, my sister. You do not have to be strong every day. Close eyes, play this song, I am proud of you even on your slow days.'}
+if(n==6){t.innerHTML='Open when proud';tx.innerHTML='Told you! You did it! I knew you would. Celebrate — even small wins. I am clapping for you from Rourkela!'}
+document.getElementById('modal').style.display='flex';updateProg(5)}
+function checkCode(){const v=document.getElementById('codeInput').value;const msg=document.getElementById('codeMsg');if(v=='2023'||v=='2024'||v=='2003'){msg.style.display='block';msg.innerHTML='✨ Unlocked! Your secret gift: A promise — I will always be your NITR brother. No matter where life goes. ♡';launch(40);updateProg(15)}else{msg.style.display='block';msg.innerHTML='Wrong code, hint: year we met (2023) — try again ♡'}}
+const quiz=[{q:'Where did we first talk properly?',opts:['LA Class','Lakeside','Mess','Hostel Gate'],a:0},{q:'My nickname for you?',opts:['Bhu','Bhuyashi','Behen','All of them ♡'],a:3},{q:'What is our forever plan?',opts:['Alumni meet','Sister for life','World tour','All above'],a:3}];
+let qi=0,score=0;
+function renderQ(){const q=quiz[qi];document.getElementById('qText').innerHTML=q.q;const box=document.getElementById('qOpts');box.innerHTML='';q.opts.forEach((o,i)=>{const d=document.createElement('div');d.className='miniGame';d.innerHTML=`<b>${o}</b>`;d.onclick=()=>ansQ(i);box.appendChild(d)})}
+function ansQ(i){if(i==quiz[qi].a)score++;qi++;if(qi<quiz.length)renderQ();else{ document.getElementById('quizBox').style.display='none';document.getElementById('quizResult').style.display='block';document.getElementById('quizResult').innerHTML=`You scored ${score}/${quiz.length} — You remember us perfectly, bhuyashi ♡`;launch(30);updateProg(15)}}
+renderQ();
+function finalSurprise(){launch(120);let c=0;const iv=setInterval(()=>{launch(20);c++;if(c>5)clearInterval(iv)},400);document.getElementById('mTitle').innerHTML='Happy Birthday, meri behen ♡';document.getElementById('mText').innerHTML='You just completed my whole little world for you. Thank you for being my sister. Now go — eat cake, make wish, and remember — NITR brother is always one call away. I love you, Bhuyashi. Always. — Ashish';document.getElementById('modal').style.display='flex'}
+function closeM(){document.getElementById('modal').style.display='none'}
+async function initBlow(){try{const s=await navigator.mediaDevices.getUserMedia({audio:true});const ctx=new (window.AudioContext||window.webkitAudioContext)();const an=ctx.createAnalyser();ctx.createMediaStreamSource(s).connect(an);const d=new Uint8Array(an.fftSize);function check(){an.getByteFrequencyData(d);let sum=d.reduce((a,b)=>a+b,0)/d.length;if(sum>35)blow();requestAnimationFrame(check)}check()}catch(e){}}
+initBlow();
+</script>
+</body>
+</html>
